@@ -41,6 +41,10 @@ button {
   transition: background 0.2s;
 }
 
+button.active {
+  background: #a0a0a0 !important;
+}
+
 button:hover {
   background: #ccc;
 }
