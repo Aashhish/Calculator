@@ -44,6 +44,7 @@ body {
   border: 1px solid #d9d9d9;
   outline: none;
   box-shadow: none;  
+  transition: background 0.5s;
 }
 
 .buttons {
@@ -61,7 +62,7 @@ button {
   background: #f0f0f0;
   cursor: pointer;
   box-shadow: 0 0 5px rgba(255, 136, 0, 0.222);
-  transition: background 0.2s;
+  transition: background 0.5s;
 }
 
 button.active {
@@ -87,9 +88,6 @@ button:hover {
 
 
 @media (max-width: 768px) {
-  body {
-   
-  }
   .calculator {
   margin-right: 100px;
   
