@@ -74,7 +74,7 @@ button:hover {
   box-shadow: 0 0 5px rgba(255, 136, 0, 0.685);
 }
 .equals{
-  background-color: #d18f13 !important;
+  background-color: #ffa600 !important;
 }
 
 .bottom{
@@ -87,15 +87,15 @@ button:hover {
 
 
 @media (max-width: 768px) {
+  body {
+   
+  }
   .calculator {
-    height: 100vh;
-    width: 100vw;
-    border-radius: 0;
-    background-color: white;
+  
   }
 
   .display{
-    width: 100vw;
+    margin-bottom: 100%;
 
   }
 
