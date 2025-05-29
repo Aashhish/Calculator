@@ -42,23 +42,36 @@ function App() {
     try {
       if (!input.trim()) return;
 
-      const sanitizedInput = input
-        .replace(/[\+\-\*\/\.%]+$/, "")
-        .replace(/(\d+(\.\d+)?)%/g, "($1/100)");
+      let expression = input;
 
-      if (!sanitizedInput || /[^\d\+\-\*\/\.\(\)]/.test(sanitizedInput)) {
+      // Handle expressions like `450 + 10%` => `450 + (450 * 10 / 100)`
+      expression = expression.replace(
+        /(\d+(\.\d+)?)(\s*[\+\-])\s*(\d+(\.\d+)?)%/g,
+        (match, base, _decimal1, operator, percent, _decimal2) => {
+          return `${base}${operator}(${base}*${percent}/100)`;
+        }
+      );
+
+      // Handle standalone percentages: 20% => (20/100)
+      expression = expression.replace(/(\d+(\.\d+)?)%/g, "($1/100)");
+
+      // Remove trailing operators
+      expression = expression.replace(/[\+\-\*\/\.]+$/, "");
+
+      // Validate input
+      if (!expression || /[^\d\+\-\*\/\.\(\)]/.test(expression)) {
         setInput("Error");
         setDisplay("Error");
         return;
       }
 
-      if (/\b\/0(\.0*)?\b/.test(sanitizedInput)) {
+      if (/\b\/0(\.0*)?\b/.test(expression)) {
         setInput("Cannot divide by zero");
         setDisplay("Cannot divide by zero");
         return;
       }
 
-      const result = eval(sanitizedInput);
+      const result = eval(expression);
       setInput(result.toString());
       setDisplay(result.toString());
     } catch (error) {
